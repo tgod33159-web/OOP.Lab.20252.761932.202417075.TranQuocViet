@@ -1,0 +1,5 @@
+1. Khi ngý?i dùng ch?n “Cancel”, chýõng tr?nh s? tr? v? giá tr? CANCEL_OPTION và thý?ng rõi vào nhánh else n?u không x? l? riêng.
+
+2. Có th? tùy ch?nh l?a ch?n b?ng cách:
+- Dùng JOptionPane.YES_NO_OPTION ð? ch? hi?n th? Yes/No
+- Dùng JOptionPane.showOptionDialog() ð? t?o các nút tùy ch?nh nhý “I do”, “I don’t”.
