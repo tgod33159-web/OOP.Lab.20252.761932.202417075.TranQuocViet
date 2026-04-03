@@ -1,0 +1,17 @@
+No, Java does not allow this.
+
+Because both constructors would have the same parameter type (a single String), Java considers them identical. Java differentiates constructors based on the number, type, and order of parameters, not the parameter names.
+
+Therefore, defining:
+
+DigitalVideoDisc(String title)
+DigitalVideoDisc(String category)
+
+will result in a compile-time error due to duplicate constructors.
+
+To solve this, constructors must differ in parameter list, for example:
+
+DigitalVideoDisc(String title, String category)
+
+Conclusion:
+Java only allows constructor overloading when the parameter lists are different.
