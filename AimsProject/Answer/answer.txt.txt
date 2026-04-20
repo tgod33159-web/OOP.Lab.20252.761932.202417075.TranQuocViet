@@ -15,3 +15,8 @@ DigitalVideoDisc(String title, String category)
 
 Conclusion:
 Java only allows constructor overloading when the parameter lists are different.
+Try to add a method addDigitalVideoDisc which allows to pass an arbitrary number of arguments for dvd. Compare to an array parameter. What do you prefer in this case
+Trong trường hợp này, sử dụng Varargs được ưu tiên hơn vì:
+Tính linh hoạt: Nó xử lý được cả trường hợp truyền đối số lẻ và truyền mảng.
+Code sạch hơn: Giúp cú pháp gọi hàm ngắn gọn, dễ đọc, không cần phải tạo mảng thủ công khi chỉ muốn thêm một vài đĩa.
+Tương thích: Nó vẫn hoạt động hoàn hảo với logic xử lý vòng lặp bên trong phương thức giống hệt như dùng mảng.
