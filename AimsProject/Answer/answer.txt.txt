@@ -20,3 +20,9 @@ Trong trường hợp này, sử dụng Varargs được ưu tiên hơn vì:
 Tính linh hoạt: Nó xử lý được cả trường hợp truyền đối số lẻ và truyền mảng.
 Code sạch hơn: Giúp cú pháp gọi hàm ngắn gọn, dễ đọc, không cần phải tạo mảng thủ công khi chỉ muốn thêm một vài đĩa.
 Tương thích: Nó vẫn hoạt động hoàn hảo với logic xử lý vòng lặp bên trong phương thức giống hệt như dùng mảng.
+Sau khi gọi hàm swap(jungleDVD, cinderellaDVD), tại sao tiêu đề của hai đối tượng vẫn giữ nguyên (không đổi)?
+Cơ chế của Java: Java là ngôn ngữ luôn luôn truyền tham trị (Pass-by-Value). Khi bạn truyền một đối tượng vào hàm, Java không truyền chính đối tượng đó mà truyền một bản sao của tham chiếu
+Sau khi gọi hàm changeTitle(jungleDVD, cinderellaDVD.getTitle()), tại sao tiêu đề của JungleDVD lại thay đổi?
+Tác động vào nội dung đối tượng: Mặc dù Java truyền bản sao tham chiếu, nhưng bản sao đó vẫn trỏ tới cùng một vùng nhớ thực sự (Heap) nơi đối tượng tồn tại.
+Viết lại phương thức swap() sao cho có thể hoán đổi chính xác hai đối tượng?
+Vì chúng ta không thể hoán đổi địa chỉ vùng nhớ trong Java, cách duy nhất để "hoán đổi" hai đối tượng DVD là hoán đổi dữ liệu bên trong (các thuộc tính) của chúng.
