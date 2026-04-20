@@ -26,3 +26,8 @@ Sau khi gọi hàm changeTitle(jungleDVD, cinderellaDVD.getTitle()), tại sao t
 Tác động vào nội dung đối tượng: Mặc dù Java truyền bản sao tham chiếu, nhưng bản sao đó vẫn trỏ tới cùng một vùng nhớ thực sự (Heap) nơi đối tượng tồn tại.
 Viết lại phương thức swap() sao cho có thể hoán đổi chính xác hai đối tượng?
 Vì chúng ta không thể hoán đổi địa chỉ vùng nhớ trong Java, cách duy nhất để "hoán đổi" hai đối tượng DVD là hoán đổi dữ liệu bên trong (các thuộc tính) của chúng.
+Kiểu trả về (return type) của phương thức toString() nên là gì?
+Kiểu trả về của phương thức toString() bắt buộc phải là String.
+Tại sao nên sử dụng phương thức isMatch(String title) trong lớp DigitalVideoDisc thay vì kiểm tra trực tiếp trong lớp Cart?
+Tính đóng gói (Encapsulation): Việc kiểm tra một đĩa DVD có khớp với một từ khóa hay không là trách nhiệm của chính đối tượng DVD đó. Lớp Cart chỉ cần ra lệnh cho DVD tự kiểm tra, thay vì phải can thiệp sâu vào dữ liệu nội bộ của DVD.
+Khả năng mở rộng: Nếu sau này quy tắc tìm kiếm thay đổi (ví dụ: tìm kiếm không phân biệt hoa thường, hoặc tìm kiếm theo từ khóa chứa trong tiêu đề), bạn chỉ cần sửa đổi code ở một nơi duy nhất là phương thức isMatch trong lớp DigitalVideoDisc, thay vì phải tìm và sửa ở tất cả những nơi có chức năng tìm kiếm.
