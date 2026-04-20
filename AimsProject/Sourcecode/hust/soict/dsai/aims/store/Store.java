@@ -1,3 +1,6 @@
+package hust.soict.dsai.aims.store;
+import hust.soict.dsai.aims.disc.DigitalVideoDisc;
+
 public class Store {
     private DigitalVideoDisc[] itemsInStore;
     private int qtyInStore = 0;
