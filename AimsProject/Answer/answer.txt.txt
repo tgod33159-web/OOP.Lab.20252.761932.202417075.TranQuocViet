@@ -31,3 +31,23 @@ Kiểu trả về của phương thức toString() bắt buộc phải là Strin
 Tại sao nên sử dụng phương thức isMatch(String title) trong lớp DigitalVideoDisc thay vì kiểm tra trực tiếp trong lớp Cart?
 Tính đóng gói (Encapsulation): Việc kiểm tra một đĩa DVD có khớp với một từ khóa hay không là trách nhiệm của chính đối tượng DVD đó. Lớp Cart chỉ cần ra lệnh cho DVD tự kiểm tra, thay vì phải can thiệp sâu vào dữ liệu nội bộ của DVD.
 Khả năng mở rộng: Nếu sau này quy tắc tìm kiếm thay đổi (ví dụ: tìm kiếm không phân biệt hoa thường, hoặc tìm kiếm theo từ khóa chứa trong tiêu đề), bạn chỉ cần sửa đổi code ở một nơi duy nhất là phương thức isMatch trong lớp DigitalVideoDisc, thay vì phải tìm và sửa ở tất cả những nơi có chức năng tìm kiếm.
+Question: Compare arrays and ArrayList. Why do we use ArrayList<Media> instead of Media[] or DigitalVideoDisc[]?
+Trả lời:
+Mảng tĩnh (Media[]): Có kích thước cố định ngay từ khi khởi tạo, không thể tự co giãn khi thêm hoặc xóa phần tử. Khó quản lý số lượng phần tử thực tế (phải dùng thêm biến đếm như qtyOrdered).
+Mảng động (ArrayList<Media>): Tự động thay đổi kích thước linh hoạt khi ta gọi hàm .add() hoặc .remove(). Hỗ trợ sẵn nhiều phương thức tối ưu như .contains(), .size(), .clear().
+Lý do sử dụng: Giỏ hàng (Cart) và Cửa hàng (Store) cần lưu trữ đồng thời nhiều loại sản phẩm khác nhau (Book, CD, DVD). Việc sử dụng ArrayList<Media> vừa tận dụng được tính đa hình (lưu các lớp con vào danh sách của lớp cha), vừa giúp quản lý danh sách sản phẩm linh hoạt mà không sợ bị tràn bộ nhớ hay giới hạn số lượng phần tử.
+Question: In PolymorphismTest, observe what happens when m.toString() is called inside the loop and explain the mechanism in detail.
+Trả lời:
+Hiện tượng: Dù biến duyệt m có kiểu khai báo là lớp cha Media, nhưng khi chương trình chạy, kết quả in ra màn hình console vẫn hiển thị đúng định dạng chi tiết riêng của từng đối tượng con (Dòng của CD có Artist, dòng của DVD có Length, dòng của Book có danh sách Authors).
+Giải thích cơ chế: Đây là minh chứng của cơ chế Liên kết muộn (Late Binding / Dynamic Binding) và Tính đa hình ở cấp độ hành vi (Behavioral Polymorphism) trong Java. Tại thời điểm biên dịch (Compile-time), trình biên dịch chỉ kiểm tra xem lớp cha Media có phương thức toString() hay không. Nhưng tại thời điểm chạy (Runtime), Máy ảo Java (JVM) sẽ nhìn vào đối tượng thực tế đang nằm trong vùng nhớ Heap để quyết định gọi phương thức toString() đã được ghi đè (@Override) của chính lớp con đó (Book, DigitalVideoDisc, hay CompactDisc).
+Question 1: What class should implement the Comparable interface?
+Question 2: In those classes, how should you implement the compareTo() method if the requirement is to sort items by title, then by cost (higher cost first)?
+Question 3: Can we have two ordering rules of the item at the same time if we use this Comparable interface approach?
+Trả lời:
+Trả lời Câu 1: Lớp cha Media nên implement interface Comparable<Media>.
+Trả lời Câu 2: Trong lớp Media, hàm compareTo(Media other) sẽ được cài đặt bằng cách so sánh thuộc tính title trước (bằng hàm compareToIgnoreCase). Nếu hai tiêu đề trùng nhau (kết quả trả về bằng 0), ta sẽ tiếp tục so sánh thuộc tính cost theo thứ tự giảm dần (đảo ngược vị trí so sánh của this.cost và other.cost).
+Trả lời Câu 3: KHÔNG. Interface Comparable chỉ cho phép định nghĩa một quy tắc sắp xếp duy nhất và cố định cho một lớp (gọi là Natural Ordering - Thứ tự tự nhiên). Nếu muốn hệ thống có nhiều quy tắc sắp xếp linh hoạt để người dùng chủ động lựa chọn trên Menu (lúc thích xếp theo tên, lúc thích xếp theo giá), bắt buộc phải sử dụng hướng tiếp cận Comparator như bài 12 đã làm.
+Question: In the AIMS application menu, before calling the play() method on an item selected from the store or cart, what must you check? Why?
+Trả lời:
+Nhiệm vụ cần làm: Phải sử dụng toán tử instanceof để kiểm tra xem đối tượng Media đó có thực thi (implements) giao diện Playable hay không: if (media instanceof Playable).
+Lý do: Danh sách ArrayList<Media> chứa cả Book, DigitalVideoDisc và CompactDisc. Trong đó, Book không hề có tính năng phát nhạc và không cài đặt giao diện Playable. Nếu ta không kiểm tra mà ép kiểu trực tiếp ((Playable) media).play(), hệ thống sẽ lập tức ném ra ngoại lệ lỗi ClassCastException và làm sập chương trình khi người dùng vô tình chọn trúng một cuốn sách để "Play".
