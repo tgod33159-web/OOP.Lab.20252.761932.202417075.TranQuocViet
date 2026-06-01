@@ -1,0 +1,15 @@
+Lab 05 answers
+
+1.3. Compare Swing and AWT elements
+- Top-level container: AWT uses Frame; Swing uses JFrame.
+- Components: AWT uses Label, TextField, Button; Swing uses JLabel, JTextField, JButton.
+- Swing components should be added to the JFrame content pane.
+- Swing components are lightweight and provide richer, more flexible UI controls than AWT.
+
+14. What happens when Aims is not updated to catch PlayerException?
+- The project will not compile where play() is called, because PlayerException is a checked exception.
+- Calls to play() must catch PlayerException or delegate it with throws.
+
+Exception hierarchy
+- java.lang.Exception
+  - hust.soict.dsai.aims.exception.PlayerException
